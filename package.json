@@ -16,6 +16,7 @@
     "@keplr-wallet/provider": "^0.12.273",
     "@keplr-wallet/stores": "^0.12.273",
     "@keplr-wallet/types": "^0.12.82",
+    "@supabase/supabase-js": "^2.57.4",
     "@tailwindcss/vite": "^4.1.13",
     "axios": "^1.6.0",
     "bech32": "^2.0.0",
