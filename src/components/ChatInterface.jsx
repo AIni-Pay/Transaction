@@ -92,6 +92,39 @@ const ChatInterface = ({ onSendTransaction, walletInfo, isConnected }) => {
     }
   };
 
+  const sendQuickMessage = (message) => {
+    // Agregar mensaje del usuario inmediatamente
+    addUserMessage(message);
+    
+    // Procesar con el chatbot
+    if (chatbot) {
+      chatbot.processMessage(message).then(response => {
+        setTimeout(() => {
+          addBotMessages(response.botMessages, 500);
+          
+          // Manejar acciones especiales
+          if (response.needsAction === 'execute_transaction') {
+            handleTransactionExecution(response.transactionData);
+          }
+        }, 800);
+      }).catch(error => {
+        console.error('Error processing quick message:', error);
+        setTimeout(() => {
+          addBotMessages([
+            "❌ Ocurrió un error procesando tu mensaje.",
+            "¿Puedes intentar de nuevo?"
+          ], 500);
+        }, 800);
+      });
+    }
+  };
+
+  const shouldShowConfirmButtons = (botMessages) => {
+    return botMessages.some(message => 
+      message.toLowerCase().includes('escribe confirmo para proceder')
+    );
+  };
+
   const handleTransactionExecution = async (transactionData) => {
     try {
       // Mostrar mensaje de procesamiento
@@ -234,6 +267,24 @@ const ChatInterface = ({ onSendTransaction, walletInfo, isConnected }) => {
                     </div>
                   ))}
                 </div>
+                
+                {/* Botones de confirmación si el bot pide confirmación */}
+                {message.type === 'bot' && shouldShowConfirmButtons(message.content) && (
+                  <div className="flex gap-2 mt-3">
+                    <button
+                      onClick={() => sendQuickMessage('confirmo')}
+                      className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-colors shadow-md flex items-center gap-2"
+                    >
+                      ✅ Confirmar
+                    </button>
+                    <button
+                      onClick={() => sendQuickMessage('reset')}
+                      className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors shadow-md flex items-center gap-2"
+                    >
+                      ❌ Cancelar
+                    </button>
+                  </div>
+                )}
                 <div className="text-xs text-gray-500 mt-1 px-2">
                   {formatTime(message.timestamp)}
                 </div>
