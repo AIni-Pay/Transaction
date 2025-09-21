@@ -5,6 +5,7 @@ import { KeplrWalletService } from './services/KeplrWalletService';
 import { TransactionService } from './services/TransactionService';
 import { formatErrorMessage, KEPLR_INSTALLATION_GUIDE } from './utils/errorHelpers';
 import ChatInterface from './components/ChatInterface';
+import img1 from './assets/logo letras IA.png';
 import './App.css';
 
 function App() {
@@ -294,11 +295,21 @@ function App() {
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700">
+      {/* Logo pequeño en la esquina superior izquierda */}
+      
+      
       <div className="max-w-5xl mx-auto px-6 py-8">
-        
+        <div className="fixed top-1 left-7 z-50">
+        <img 
+          src={img1} 
+          alt="Logo" 
+          className="w-70 h-70 object-contain opacity-90 hover:opacity-100 transition-opacity cursor-pointer"
+        />
+      </div>
         <h1 className="text-4xl md:text-5xl font-bold text-white text-center mb-4 tracking-wide drop-shadow-2xl shadow-black/50">
           🌟 Celestia Token Sender Assistant
         </h1>
+        
         <p className="text-lg md:text-xl text-white text-center max-w-2xl mx-auto leading-relaxed mb-8 font-light drop-shadow-lg">
           Chatbot inteligente para enviar tokens TIA usando{' '}
           <span className="text-cyan-300 font-semibold drop-shadow-md">
