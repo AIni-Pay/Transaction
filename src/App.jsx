@@ -216,49 +216,57 @@ function App() {
   };
 
   return (
-    <div className="container">
+    <div className="min-h-screen w-full bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700">
+      <div className="max-w-5xl mx-auto px-6 py-8">
         
-      <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent text-center mb-4 tracking-wide drop-shadow-lg">
-        🌟 Celestia Token Sender Assistant
-      </h1>
-      <p className="text-lg md:text-xl text-gray-300 text-center max-w-2xl mx-auto leading-relaxed mb-8 font-light">
-        Chatbot inteligente para enviar tokens TIA usando{' '}
-        <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400 font-semibold">
-          lenguaje natural
-        </span>
-      </p>
-      
-      <ChatInterface 
-        onSendTransaction={handleChatTransaction}
-        walletInfo={walletInfo}
-        isConnected={walletInfo.isConnected}
-      />
-
-      {/* Status minimal en la parte inferior */}
-      {walletInfo.isConnected && (
-        <div className="wallet-status-mini">
-          <span>👛 {walletInfo.address?.substring(0, 10)}...{walletInfo.address?.substring(walletInfo.address.length - 6)}</span>
-          <span>🌐 {walletInfo.chain}</span>
-          {balance && <span>💰 {formatBalance(balance)}</span>}
+        <h1 className="text-4xl md:text-5xl font-bold text-white text-center mb-4 tracking-wide drop-shadow-2xl shadow-black/50">
+          🌟 Celestia Token Sender Assistant
+        </h1>
+        <p className="text-lg md:text-xl text-white text-center max-w-2xl mx-auto leading-relaxed mb-8 font-light drop-shadow-lg">
+          Chatbot inteligente para enviar tokens TIA usando{' '}
+          <span className="text-cyan-300 font-semibold drop-shadow-md">
+            lenguaje natural
+          </span>
+        </p>
+        <div>
+          <ChatInterface 
+          onSendTransaction={handleChatTransaction}
+          walletInfo={walletInfo}
+          isConnected={walletInfo.isConnected}
+        />
         </div>
-      )}
+        
 
-      {/* Error display if needed */}
-      {walletError && (
-        <div className="error-message-mini">
-          <strong>{walletError.title}:</strong> {walletError.message}
-          {walletError.type === 'KEPLR_NOT_INSTALLED' && (
-            <a 
-              href={KEPLR_INSTALLATION_GUIDE.downloadUrl} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="button small"
-            >
-              Instalar Keplr
-            </a>
-          )}
-        </div>
-      )}
+        {/* Status minimal en la parte inferior */}
+        {walletInfo.isConnected && (
+          <div className="fixed bottom-6 left-6 bg-white/90 backdrop-blur-sm border border-gray-200 rounded-lg px-4 py-2 shadow-lg">
+            <div className="flex items-center gap-3 text-sm text-gray-700">
+              <span>👛 {walletInfo.address?.substring(0, 10)}...{walletInfo.address?.substring(walletInfo.address.length - 6)}</span>
+              <span>🌐 {walletInfo.chain}</span>
+              {balance && <span>💰 {formatBalance(balance)}</span>}
+            </div>
+          </div>
+        )}
+
+        {/* Error display if needed */}
+        {walletError && (
+          <div className="fixed top-6 right-6 max-w-sm bg-red-50 border border-red-200 rounded-lg p-4 shadow-lg">
+            <div className="text-red-800">
+              <strong className="text-red-900">{walletError.title}:</strong> {walletError.message}
+              {walletError.type === 'KEPLR_NOT_INSTALLED' && (
+                <a 
+                  href={KEPLR_INSTALLATION_GUIDE.downloadUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-block mt-2 px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white text-sm rounded-md transition-colors"
+                >
+                  Instalar Keplr
+                </a>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
