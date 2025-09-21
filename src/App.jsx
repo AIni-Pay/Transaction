@@ -217,9 +217,17 @@ function App() {
 
   return (
     <div className="container">
-      <h1>🌟 Celestia Token Sender Assistant</h1>
-      <p>Chatbot inteligente para enviar tokens TIA usando lenguaje natural</p>
-
+        
+      <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent text-center mb-4 tracking-wide drop-shadow-lg">
+        🌟 Celestia Token Sender Assistant
+      </h1>
+      <p className="text-lg md:text-xl text-gray-300 text-center max-w-2xl mx-auto leading-relaxed mb-8 font-light">
+        Chatbot inteligente para enviar tokens TIA usando{' '}
+        <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400 font-semibold">
+          lenguaje natural
+        </span>
+      </p>
+      
       <ChatInterface 
         onSendTransaction={handleChatTransaction}
         walletInfo={walletInfo}
