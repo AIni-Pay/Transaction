@@ -24,7 +24,7 @@ Esta dApp es un **puente intuitivo** entre lenguaje natural y la blockchain de C
 
 ### ✨ Características Únicas
 
-- �️ **Interfaz de Lenguaje Natural**: Convierte texto humano en transacciones blockchain
+- 🗣️ **Interfaz de Lenguaje Natural**: Convierte texto humano en transacciones blockchain
 - 🤖 **IA Integrada**: Usa DeepSeek AI para interpretar intenciones complejas
 - 🔗 **Transferencias Nativas**: Envío directo de TIA sin contratos intermediarios
 - 🌐 **Multi-Red**: Soporte para Celestia Mainnet y Mocha Testnet
@@ -146,7 +146,7 @@ const msg = {
 
 ---
 
-## � ¿Por qué NO usamos contratos inteligentes?
+## 🚫 ¿Por qué NO usamos contratos inteligentes?
 
 ### 🤔 La pregunta común: "¿Necesito un contrato en Sepolia?"
 
@@ -249,7 +249,7 @@ sequenceDiagram
     K->>K: createMsg()
     K->>U: 🔏 Solicita firma
     U->>K: ✍️ Firma aprobada
-    K->>C: � Broadcast tx
+    K->>C: 📡 Broadcast tx
     C-->>K: ✅ tx hash
     K-->>UI: success + hash
     UI->>U: 🎉 "Transacción exitosa!"
@@ -382,24 +382,28 @@ VITE_DEEPSEEK_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ### 🎯 **Escenarios Prácticos**
 
 #### 1. 💰 **Transferencias Personales**
+
 ```bash
 Usuario: "Envía 5 TIA a mi hermano celestia1abc..."
 Sistema: ✅ Detecta monto, dirección, red mainnet por defecto
 ```
 
 #### 2. 🧪 **Testing en Mocha**
+
 ```bash
 Usuario: "Manda 0.1 Mocha a celestia1test..."
 Sistema: ✅ Auto-detecta red Mocha Testnet por palabra clave
 ```
 
 #### 3. 🤖 **Comandos Complejos con IA**
+
 ```bash
 Usuario: "Necesito enviar dos TIA y medio a celestia1xyz para pagar el servicio"
 DeepSeek: ✅ Interpreta "dos TIA y medio" = 2.5 TIA
 ```
 
 #### 4. 🔄 **Múltiples Formatos**
+
 ```bash
 ✅ "Envía 1000000 utia a celestia1..." → 1 TIA
 ✅ "Transfer 0.5 TIA to celestia1..." → inglés
@@ -424,12 +428,14 @@ DeepSeek: ✅ Interpreta "dos TIA y medio" = 2.5 TIA
 #### ❌ **Problema: Solo se consume gas, no hay transferencia**
 
 **Síntomas:**
-```
+
+```text
 ACC 1: 0.886268 TIA → 0.884268 TIA (solo gas)
 ACC 2: 1.097823 TIA → 1.097823 TIA (sin cambios)
 ```
 
 **Diagnóstico:**
+
 ```mermaid
 graph TD
     A[🔍 Transacción enviada] --> B{Gas consumido?}
@@ -449,6 +455,7 @@ graph TD
 ```
 
 **Solución aplicada:**
+
 ```javascript
 // ❌ Problema original
 formatAmount(amount, unit) {
@@ -478,6 +485,7 @@ formatAmount(amount, unit) {
 ### 🔍 **Herramientas de Debug**
 
 #### 1. **Logs de Consola**
+
 ```javascript
 // En DevTools (F12)
 🔍 Parsing text: "Envía 0.1 Mocha a celestia1..."
@@ -488,6 +496,7 @@ formatAmount(amount, unit) {
 ```
 
 #### 2. **Verificación de Red**
+
 ```bash
 # Verificar conectividad RPC
 curl https://celestia-testnet-rpc.itrocket.net:443/status
@@ -499,6 +508,7 @@ curl -X POST \
 ```
 
 #### 3. **Estados del ChatBot**
+
 ```mermaid
 stateDiagram-v2
     [*] --> greeting: Inicio
@@ -516,6 +526,7 @@ stateDiagram-v2
 ### 🚨 **Errores Críticos**
 
 #### ❌ **Error de Conversión de Unidades**
+
 ```javascript
 // Problema detectado y corregido
 const incorrectAmount = 0.1; // Enviaba 0.1 utia en lugar de 100000 utia
@@ -523,6 +534,7 @@ const correctAmount = 0.1 * 1000000; // 100000 utia = 0.1 TIA
 ```
 
 #### ✅ **Verificación Post-Fix**
+
 ```bash
 # Comando de prueba
 Input: "Envía 0.1 Mocha a celestia1uaclygpvytqwdvmrtjskyq0087az3v5wdedn7k"
@@ -552,6 +564,7 @@ Actual: ✅ 100000 utia transferidos correctamente
 ### ⚙️ **Configuración Avanzada**
 
 #### 🔗 **RPC Endpoints Personalizados**
+
 ```javascript
 // En networks.js
 export const CUSTOM_RPCS = {
@@ -563,6 +576,7 @@ export const CUSTOM_RPCS = {
 ```
 
 #### 🎛️ **Fees Customizados**
+
 ```javascript
 // En KeplrWalletService.js
 const customFee = {
@@ -616,173 +630,6 @@ MIT License - Código abierto para el ecosistema
 
 ---
 
-**🌟 ¡Gracias por usar Celestia Token Sender!** 
+**🌟 ¡Gracias por usar Celestia Token Sender!**
 
 *Una herramienta que demuestra el poder de las transferencias nativas sin la complejidad innecesaria de contratos inteligentes.*
-
----
-
-## 🏃‍♂️ Desarrollo
-
-```bash
-npm run dev
-```
-
-La aplicación estará disponible en `http://localhost:5173/`
-
-## 📋 Requisitos
-
-- **Keplr Wallet**: Extensión de navegador instalada
-- **Node.js**: Versión 18 o superior
-- **DeepSeek API Key**: Para funcionalidad de IA (opcional)
-
-## 🎯 Uso
-
-### 1. Conectar Wallet
-- Haz clic en "Conectar a Celestia" o "Conectar a Mocha"
-- Autoriza la conexión en Keplr
-- La aplicación mostrará tu dirección y balance
-
-### 2. Enviar Tokens
-- Escribe una instrucción en lenguaje natural como:
-  - `"Envía 5 TIA a celestia1qnk2n4nlkpw9xfqntladh74w6ujtulwnmxnh3k"`
-  - `"Manda 0.5 TIA a celestia1abc..."`
-  - `"Transfer 100 utia to celestia1def..."`
-- Haz clic en "Parsear Instrucción"
-- Revisa el resultado del parsing
-- Si todo está correcto, haz clic en "Enviar Transacción"
-
-### 3. Ejemplos de Instrucciones
-
-| Instrucción | Resultado |
-|-------------|-----------|
-| `"Envía 5 TIA a celestia1abc..."` | ✅ Envío de 5 TIA |
-| `"Manda dos TIA a celestia1xyz..."` | ✅ Envío de 2 TIA (convierte texto a número) |
-| `"Transfer 1000000 utia to celestia1def..."` | ✅ Envío de 1 TIA (en utia) |
-| `"¿Qué es Celestia?"` | ❌ No es instrucción de envío |
-
-## 🔧 Arquitectura
-
-### Componentes Principales
-
-1. **TokenInstructionParser**: Parser local para extraer datos de texto
-2. **DeepSeekService**: Integración con IA para mejorar el parsing
-3. **KeplrWalletService**: Manejo de conexión y transacciones con Keplr
-4. **App**: Componente principal de React con la interfaz
-
-### Flujo de Procesamiento
-
-```
-Texto del usuario
-    ↓
-TokenInstructionParser (local)
-    ↓
-DeepSeekService (AI enhancement)
-    ↓
-Validación y formateo
-    ↓
-KeplrWalletService (transacción)
-    ↓
-Resultado en blockchain
-```
-
-## 🛠️ Esquema JSON del Parser
-
-El parser devuelve un objeto JSON con la siguiente estructura:
-
-```json
-{
-  "raw_text": "string",
-  "address": "string or empty",
-  "address_valid": true|false,
-  "chain": "celestia" | "mocha" | "unknown",
-  "amount": {
-    "original": "string",
-    "numeric": number|null,
-    "unit": "string|null"
-  },
-  "need_clarification": true|false,
-  "clarifying_questions": ["string", ...],
-  "intent": "send" | "other",
-  "confidence": number,
-  "error": null | "string"
-}
-```
-
-## 🔒 Seguridad
-
-- ✅ Nunca solicita claves privadas o frases semilla
-- ✅ Todas las transacciones se firman localmente en Keplr
-- ✅ Validación de direcciones antes del envío
-- ✅ Confirmación manual de cada transacción
-
-## 🧪 Testing
-
-Ejecutar tests básicos:
-```bash
-node test.js
-```
-
-## 🌐 Redes Soportadas
-
-### Celestia Mainnet
-- **Chain ID**: `celestia`
-- **RPC**: `https://rpc.celestia.pops.one`
-- **Prefijo**: `celestia1...`
-
-### Mocha Testnet
-- **Chain ID**: `mocha-4`
-- **RPC**: `https://rpc.mocha-4.pops.one`
-- **Prefijo**: `celestia1...` (usa mismo prefijo)
-
-## 📦 Tecnologías
-
-- **Frontend**: React + Vite
-- **Wallet**: Keplr Wallet Integration
-- **Blockchain**: CosmJS para transacciones Cosmos
-- **IA**: DeepSeek API para procesamiento de lenguaje natural
-- **Validación**: Bech32 para direcciones
-- **Estilo**: CSS personalizado
-
-## 🐛 Troubleshooting
-
-### Error: "Keplr wallet no está instalado"
-- Instala la extensión Keplr desde la tienda de tu navegador
-
-### Error: "DeepSeek API key not configured"
-- Asegúrate de que el archivo `.env` tenga la clave API correcta
-
-### Error: "Chain not supported"
-- Verifica que estés usando 'celestia' o 'mocha' como nombre de red
-
-### Transacción falla
-- Verifica que tengas balance suficiente
-- Confirma que la dirección de destino sea válida
-- Asegúrate de estar en la red correcta
-
-## 🤝 Contribuciones
-
-1. Fork el proyecto
-2. Crea una rama para tu feature
-3. Commit tus cambios
-4. Push a la rama
-5. Abre un Pull Request
-
-## 📄 Licencia
-
-MIT License - ver archivo LICENSE para detalles
-
-## 🙏 Agradecimientos
-
-- Celestia Labs por la infraestructura blockchain
-- Keplr Team por el excelente wallet
-- DeepSeek por la API de IA
-- Cosmos ecosystem por las herramientas de desarrollo
-
----
-
-**¡La logramos! 🎉** Esta dApp está lista para enviar tokens TIA de manera intuitiva usando lenguaje natural.#   T r a n s a c t i o n 
- 
- #   T r a n s a c t i o n 
- 
- 
